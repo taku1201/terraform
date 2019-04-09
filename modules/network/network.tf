@@ -1,6 +1,7 @@
 variable "name" {}
 variable "environment" {}
 variable "region" {}
+variable "domain_name" {}
 variable "cidr_block" {}
 variable "cidr_block_public_1a" {}
 variable "cidr_block_public_1c" {}
@@ -44,6 +45,14 @@ module "eip" {
     source      = "./eip"
     name        = "${var.name}"
     environment = "${var.environment}"
+}
+
+module "dhcp" {
+    source      = "./dhcp"
+    name        = "${var.name}"
+    environment = "${var.environment}"
+    domain_name = "${var.domain_name}"
+    vpc_id      = "${module.vpc.vpc_id}"
 }
 
 module "igw" {
