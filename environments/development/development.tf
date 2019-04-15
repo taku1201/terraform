@@ -20,3 +20,11 @@ module "network" {
     domain_name           = "${var.domain_name}"
     cidr_block            = "${var.cidr_block}"
 }
+
+module "security" {
+    source      = "../../modules/security"
+    name        = "${var.name}"
+    environment = "${var.environment}"
+    vpc_id      = "${module.network.vpc_id}"
+    cidr_block  = "${var.cidr_block}"
+}
