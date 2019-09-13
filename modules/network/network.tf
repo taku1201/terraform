@@ -1,13 +1,3 @@
-variable "name" {}
-variable "environment" {}
-variable "domain_name" {}
-variable "availability_zone" {
-    type = "map"
-}
-variable "cidr_block" {
-    type = "map"
-}
-
 module "vpc" {
     source      = "./vpc"
     name        = "${var.name}"
@@ -60,10 +50,5 @@ module "ngw" {
     name                 = "${var.name}"
     environment          = "${var.environment}"
     subnet_id            = "${module.subnet.subnet_id}"
-    allocation_id_ngw_1a = "${module.eip.allocation_id_ngw_1a}"
-    allocation_id_ngw_1c = "${module.eip.allocation_id_ngw_1c}"
-}
-
-output "vpc_id" {
-    value = "${module.vpc.vpc_id}"
+    eip_allocation_id    = "${module.eip.eip_allocation_id}"
 }

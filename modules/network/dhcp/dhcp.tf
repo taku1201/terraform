@@ -1,11 +1,8 @@
-variable "name" {}
-variable "environment" {}
-variable "domain_name" {}
-variable "vpc_id" {}
-
 resource "aws_vpc_dhcp_options" "main" {
     domain_name         = "${var.domain_name}"
-    domain_name_servers = ["AmazonProvidedDNS"]
+    domain_name_servers = [
+        "AmazonProvidedDNS"
+    ]
     tags {
         Name        = "${var.name}"
         Environment = "${var.environment}"

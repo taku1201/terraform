@@ -1,7 +1,3 @@
-variable "name" {}
-variable "environment" {}
-variable "vpc_id" {}
-
 resource "aws_security_group" "manage" {
     name   = "${var.name}-manage"
     vpc_id = "${var.vpc_id}"
@@ -22,7 +18,7 @@ resource "aws_security_group_rule" "manage" {
     security_group_id = "${aws_security_group.manage.id}"    
 }
 
-resource "aws_security_group_rule" "manage_1" {
+resource "aws_security_group_rule" "manage-1" {
     type      = "egress"
     from_port = 0
     to_port   = 0
