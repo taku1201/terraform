@@ -1,7 +1,3 @@
-variable "name" {}
-variable "environment" {}
-variable "vpc_id" {}
-
 resource "aws_security_group" "alb" {
     name   = "${var.name}-alb"
     vpc_id = "${var.vpc_id}"
@@ -22,7 +18,7 @@ resource "aws_security_group_rule" "alb" {
     security_group_id = "${aws_security_group.alb.id}"    
 }
 
-resource "aws_security_group_rule" "alb_1" {
+resource "aws_security_group_rule" "alb-1" {
     type      = "ingress"
     from_port = 443
     to_port   = 443
@@ -33,7 +29,7 @@ resource "aws_security_group_rule" "alb_1" {
     security_group_id = "${aws_security_group.alb.id}"    
 }
 
-resource "aws_security_group_rule" "alb_2" {
+resource "aws_security_group_rule" "alb-2" {
     type      = "egress"
     from_port = 0
     to_port   = 0

@@ -1,10 +1,3 @@
-variable "name" {}
-variable "environment" {}
-variable "vpc_id" {}
-variable "cidr_block" {
-    type = "map"
-}
-
 resource "aws_security_group" "web" {
     name   = "${var.name}-web"
     vpc_id = "${var.vpc_id}"
@@ -20,25 +13,25 @@ resource "aws_security_group_rule" "web" {
     to_port   = 22
     protocol  = "tcp"
     cidr_blocks = [
-        "${lookup(var.cidr_block, "manage_1a")}",
-        "${lookup(var.cidr_block, "manage_1c")}"        
+        "${var.cidr_block["manage_1a"]}",
+        "${var.cidr_block["manage_1c"]}"        
     ]
     security_group_id = "${aws_security_group.web.id}"    
 }
 
-resource "aws_security_group_rule" "web_1" {
+resource "aws_security_group_rule" "web-1" {
     type      = "ingress"
     from_port = 80
     to_port   = 80
     protocol  = "tcp"
     cidr_blocks = [
-        "${lookup(var.cidr_block, "public_1a")}",
-        "${lookup(var.cidr_block, "public_1c")}"        
+        "${var.cidr_block["public_1a"]}",
+        "${var.cidr_block["public_1c"]}"        
     ]
     security_group_id = "${aws_security_group.web.id}"    
 }
 
-resource "aws_security_group_rule" "web_2" {
+resource "aws_security_group_rule" "web-2" {
     type      = "egress"
     from_port = 0
     to_port   = 0
